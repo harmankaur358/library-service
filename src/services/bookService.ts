@@ -7,6 +7,9 @@ const books: Book[] = [
         author: "F. Scott Fitzgerald",
         genre: "Fiction",
         isBorrowed: false,
+        borrowerId: undefined,
+        dueDate:undefined
+
     },
     {
         id: "2",
@@ -14,6 +17,8 @@ const books: Book[] = [
         author: "George Orwell",
         genre: "Dystopian",
         isBorrowed: false,
+        borrowerId: undefined,
+        dueDate: undefined
     },
     {
         id: "3",
@@ -21,6 +26,8 @@ const books: Book[] = [
         author: "Harper Lee",
         genre: "Classic",
         isBorrowed: false,
+        borrowerId: undefined,
+        dueDate: undefined
     },
 ];
 
@@ -208,4 +215,16 @@ export const returnBook = (id: string): Book | null => {
  */
 export const getRecommendations = (): Book[] => {
     return structuredClone(books.slice(0, 3));
+};
+
+
+export const getBookById = (id: string): Book | null => {
+  const book = books.find((b) => b.id === id);
+  if (!book) return null;
+
+   return structuredClone({
+    borrowerId: undefined,
+    dueDate: undefined,
+    ...book,
+  });
 };

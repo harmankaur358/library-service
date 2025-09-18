@@ -124,3 +124,30 @@ export const getRecommendations = (req: Request, res: Response): void => {
         });
     }
 };
+
+export const getBookById = (req: Request, res: Response) => {
+  const { id } = req.params;
+
+    if (!id || id.trim() === "") {
+    return res.status(HTTP_STATUS.BAD_REQUEST).json({
+      message: "Book ID is required",
+      data: null,
+    });
+  }
+
+  const book = bookService.getBookById(id);
+
+  if (!book) {
+    return res.status(HTTP_STATUS.NOT_FOUND).json({
+      message: `Book with ID "${id}" not found`,
+      data: null,
+    });
+  }
+
+  return res.status(HTTP_STATUS.OK).json({
+    message: "Book retrieved successfully",
+    data: book,
+  });
+};
+
+
