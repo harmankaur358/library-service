@@ -217,7 +217,7 @@ export const getRecommendations = (): Book[] => {
     return structuredClone(books.slice(0, 3));
 };
 
-
+/**GetBookById for returning book by id */
 export const getBookById = (id: string): Book | null => {
   const book = books.find((b) => b.id === id);
   if (!book) return null;
