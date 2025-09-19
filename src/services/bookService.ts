@@ -7,6 +7,9 @@ const books: Book[] = [
         author: "F. Scott Fitzgerald",
         genre: "Fiction",
         isBorrowed: false,
+        borrowerId: undefined,
+        dueDate:undefined
+
     },
     {
         id: "2",
@@ -14,6 +17,8 @@ const books: Book[] = [
         author: "George Orwell",
         genre: "Dystopian",
         isBorrowed: false,
+        borrowerId: undefined,
+        dueDate: undefined
     },
     {
         id: "3",
@@ -21,6 +26,8 @@ const books: Book[] = [
         author: "Harper Lee",
         genre: "Classic",
         isBorrowed: false,
+        borrowerId: undefined,
+        dueDate: undefined
     },
 ];
 
@@ -199,13 +206,32 @@ export const returnBook = (id: string): Book | null => {
 /**
  * Gets a list of recommended books from the library.
  * Right now it returns the first 3 books in the system.
- *
- * @returns {Book[]} Array of up to 3 recommended books
- *
- * @example
  * const recommendations = getRecommendations();
  * console.log(`Got ${recommendations.length} recommendations`);
  */
 export const getRecommendations = (): Book[] => {
     return structuredClone(books.slice(0, 3));
+};
+
+/**GetBookById  */
+export const getBookById = (id: string): Book | null => {
+  const book = books.find((b) => b.id === id);
+  if (!book) return null;
+
+  return structuredClone<Book>({
+    ...book,
+    borrowerId: book.borrowerId ?? null,
+    dueDate: book.dueDate ?? null,
+  });
+};
+
+/**getAvialable books */
+export const getAvailableBooks = (): Book[] => {
+  return books
+    .filter((b) => !b.isBorrowed)
+    .map((book): Book => ({
+      ...book,
+      borrowerId: book.borrowerId ?? null,
+      dueDate: book.dueDate ?? null,
+    }));
 };
