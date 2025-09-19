@@ -206,10 +206,6 @@ export const returnBook = (id: string): Book | null => {
 /**
  * Gets a list of recommended books from the library.
  * Right now it returns the first 3 books in the system.
- *
- * @returns {Book[]} Array of up to 3 recommended books
- *
- * @example
  * const recommendations = getRecommendations();
  * console.log(`Got ${recommendations.length} recommendations`);
  */
