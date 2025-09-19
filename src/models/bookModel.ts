@@ -4,6 +4,6 @@ export interface Book {
     author: string;
     genre: string;
     isBorrowed: boolean;
-    borrowerId?: string;
-    dueDate?: string;
+    borrowerId?: string | null;
+    dueDate?: string | null;
 }

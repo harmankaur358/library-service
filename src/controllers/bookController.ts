@@ -1,3 +1,4 @@
+// Import statements
 import { Request, Response } from "express";
 import { HTTP_STATUS } from "../constants/httpConstants";
 import * as bookService from "../services/bookService";
@@ -124,3 +125,64 @@ export const getRecommendations = (req: Request, res: Response): void => {
         });
     }
 };
+
+/**GetBookByID controller */
+export const getBookById = (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  if (!id || id.trim() === "") {
+    return res.status(HTTP_STATUS.BAD_REQUEST).json({
+      message: "Book ID is required",
+      data: null,
+    });
+  }
+
+  const book = bookService.getBookById(id);
+
+  if (!book) {
+    return res.status(HTTP_STATUS.NOT_FOUND).json({
+      message: `Book with ID "${id}" not found`,
+      data: null,
+    });
+  }
+
+  const bookResponse = {
+    ...book,
+    borrowerId: book.borrowerId ?? null,
+    dueDate: book.dueDate ?? null,
+  };
+
+  return res.status(HTTP_STATUS.OK).json({
+    message: "Book retrieved successfully",
+    data: bookResponse,
+  });
+};
+
+/**getAvialableBooks controlller */
+export const getAvailableBooks = (req: Request, res: Response) => {
+  try {
+    const availableBooks = bookService
+      .getAllBooks()
+      .filter((b) => !b.isBorrowed)
+      .map((b) => ({
+        ...b,
+        borrowerId: b.borrowerId ?? null,
+        dueDate: b.dueDate ?? null,
+      }));
+
+    return res.status(HTTP_STATUS.OK).json({
+      message: "Available books retrieved successfully",
+      data: availableBooks,
+      count: availableBooks.length,
+    });
+  } catch (error) {
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+      message: "Error fetching available books",
+      data: [],
+      count: 0,
+    });
+  }
+};
+
+
+

@@ -5,7 +5,7 @@ const app: Express = express();
 app.use(express.json());
 
 /**
- * Mount the book routes on /api/v1/books
+ * Book routes on /api/v1/books
  */
 app.use("/api/v1/books", bookRoutes);
 
@@ -15,5 +15,6 @@ app.use("/api/v1/books", bookRoutes);
 app.use((req: Request, res: Response): void => {
     res.status(404).json({ message: "Endpoint not found" });
 });
+
 
 export default app;
