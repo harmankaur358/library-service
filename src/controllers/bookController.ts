@@ -125,6 +125,7 @@ export const getRecommendations = (req: Request, res: Response): void => {
     }
 };
 
+/**GetBookByID controller */
 export const getBookById = (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -155,6 +156,8 @@ export const getBookById = (req: Request, res: Response) => {
     data: bookResponse,
   });
 };
+
+/**getAvialableBooks controlller */
 export const getAvailableBooks = (req: Request, res: Response) => {
   try {
     const availableBooks = bookService

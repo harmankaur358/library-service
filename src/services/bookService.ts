@@ -217,6 +217,7 @@ export const getRecommendations = (): Book[] => {
     return structuredClone(books.slice(0, 3));
 };
 
+/**GetBookById  */
 export const getBookById = (id: string): Book | null => {
   const book = books.find((b) => b.id === id);
   if (!book) return null;
@@ -228,6 +229,7 @@ export const getBookById = (id: string): Book | null => {
   });
 };
 
+/**getAvialable books */
 export const getAvailableBooks = (): Book[] => {
   return books
     .filter((b) => !b.isBorrowed)
