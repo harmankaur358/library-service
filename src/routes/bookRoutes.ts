@@ -8,6 +8,7 @@ import {
     returnBook,
     getRecommendations,
     getBookById,
+    getAvailableBooks
 } from "../controllers/bookController";
 
 const router: Router = Router();
@@ -17,6 +18,7 @@ const router: Router = Router();
  */
 router.get("/", getAllBooks);
 router.post("/", addBook);
+router.get("/available", getAvailableBooks);
 router.put("/:id", updateBook);
 router.delete("/:id", deleteBook);
 router.post("/:id/borrow", borrowBook);
