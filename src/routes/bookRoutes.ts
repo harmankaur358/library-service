@@ -16,9 +16,9 @@ const router: Router = Router();
 /**
  * Define routes for book management
  */
+router.get("/available", getAvailableBooks);
 router.get("/", getAllBooks);
 router.post("/", addBook);
-router.get("/available", getAvailableBooks);
 router.put("/:id", updateBook);
 router.delete("/:id", deleteBook);
 router.post("/:id/borrow", borrowBook);

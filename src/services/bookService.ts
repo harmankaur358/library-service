@@ -217,25 +217,23 @@ export const getRecommendations = (): Book[] => {
     return structuredClone(books.slice(0, 3));
 };
 
-/**GetBookById for returning book by id */
 export const getBookById = (id: string): Book | null => {
   const book = books.find((b) => b.id === id);
   if (!book) return null;
 
-   return structuredClone({
-    borrowerId: undefined,
-    dueDate: undefined,
+  return structuredClone<Book>({
     ...book,
+    borrowerId: book.borrowerId ?? null,
+    dueDate: book.dueDate ?? null,
   });
 };
 
 export const getAvailableBooks = (): Book[] => {
   return books
     .filter((b) => !b.isBorrowed)
-    .map((book) => ({
+    .map((book): Book => ({
       ...book,
-      borrowerId: book.borrowerId ?? undefined,
-      dueDate: book.dueDate ?? undefined,
+      borrowerId: book.borrowerId ?? null,
+      dueDate: book.dueDate ?? null,
     }));
 };
-
