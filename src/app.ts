@@ -5,7 +5,7 @@ const app: Express = express();
 app.use(express.json());
 
 /**
- * Mount the book routes on /api/v1/books
+ * Book routes on /api/v1/books
  */
 app.use("/api/v1/books", bookRoutes);
 
