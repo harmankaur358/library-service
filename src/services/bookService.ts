@@ -229,3 +229,13 @@ export const getBookById = (id: string): Book | null => {
   });
 };
 
+export const getAvailableBooks = (): Book[] => {
+  return books
+    .filter((b) => !b.isBorrowed)
+    .map((book) => ({
+      ...book,
+      borrowerId: book.borrowerId ?? undefined,
+      dueDate: book.dueDate ?? undefined,
+    }));
+};
+
